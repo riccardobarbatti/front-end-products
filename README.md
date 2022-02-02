@@ -10,7 +10,7 @@ React Front Basic in Typescript
 - typescript
 - vite
 
-# CRUD front end
+# CRUD
 
 create - read - update - delete
 
