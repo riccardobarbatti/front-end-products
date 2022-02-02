@@ -10,11 +10,15 @@ import {Provider} from "react-redux";
 
 axios.defaults.baseURL = 'http://localhost:8000/api/';
 axios.defaults.withCredentials = true;
+//set Redux store
+const store = configureStore();
 
 ReactDOM.render(
   <React.StrictMode>
       <BrowserRouter>
-         <App />
+          <Provider store={store}>
+              <App />
+          </Provider>
       </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

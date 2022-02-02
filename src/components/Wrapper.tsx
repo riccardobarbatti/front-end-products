@@ -3,40 +3,39 @@ import Navbar from "../components/Navbar";
 import Nav from "../components/Nav";
 import Menu from "./Menu";
 import axios from "axios";
-import {useNavigate} from 'react-router-dom';
+import {Navigate} from 'react-router-dom';
 import {connect} from "react-redux";
 import {User} from "../models/user";
 import {setUser} from "../redux/actions/setUserAction";
 
-class  Wrapper extends Component {
-
+const  Wrapper =(props: any) => {
     // const navigate = useNavigate();
-    // const [redirect, setRedirect] = useState(false);
-    //
-    // useEffect(() => {
-    //     (
-    //         async () => {
-    //             try {
-    //                 const {data} = await axios.get('user');
-    //
-    //                 props.setUser(new User(
-    //                     data.id,
-    //                     data.first_name,
-    //                     data.last_name,
-    //                     data.email,
-    //                     data.role
-    //                 ));
-    //             } catch (e) {
-    //                 setRedirect(true);
-    //             }
-    //         }
-    //     )();
-    // }, []);
-    //
-    // if (redirect) {
-    //      navigate ("/login");
-    // }
-    render() {
+    const [redirect, setRedirect] = useState(false);
+
+    useEffect(() => {
+        (
+            async () => {
+                try {
+                    const {data} = await axios.get('user');
+                    //set redux  action
+                    props.setUser(new User(
+                        data.id,
+                        data.first_name,
+                        data.last_name,
+                        data.email,
+                        data.role
+                    ));
+                } catch (e) {
+                    setRedirect(true);
+                }
+            }
+        )();
+    }, []);
+
+    if (redirect) {
+          <Navigate to="/login"/>;
+    }
+
         return (
             <>
                 <Nav/>
@@ -46,25 +45,26 @@ class  Wrapper extends Component {
                         <Menu/>
 
                         <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                            {this.props.children}
+                            {props.children}
                         </main>
                     </div>
                 </div>
             </>
         );
+
+}
+//map get users state
+const mapStateToProps = (state: { user: User }) => {
+    return {
+        user: state.user
+    };
+}
+//send event to other components
+const mapDispatchToProps = (dispatch: Dispatch<any>) => {
+    return {
+        setUser: (user: User) => dispatch(setUser(user))
     }
 }
-// const mapStateToProps = (state: { user: User }) => {
-//     return {
-//         user: state.user
-//     };
-// }
-//
-// const mapDispatchToProps = (dispatch: Dispatch<any>) => {
-//     return {
-//         setUser: (user: User) => dispatch(setUser(user))
-//     }
-// }
-//
-// export default connect(mapStateToProps, mapDispatchToProps)(Wrapper);
-export default Wrapper;
+
+export default connect(mapStateToProps, mapDispatchToProps)(Wrapper);
+//export default connect()(Wrapper);

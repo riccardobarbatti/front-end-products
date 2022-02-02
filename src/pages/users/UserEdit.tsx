@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, {SyntheticEvent, useEffect, useState} from 'react';
-import {Navigate, useParams, useLocation} from 'react-router-dom';
+import {Navigate, useParams} from 'react-router-dom';
 import Wrapper from "../../components/Wrapper";
 import {Role} from "../../models/role";
 

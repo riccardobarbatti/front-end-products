@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, {useEffect, useState} from 'react';
 import Wrapper from "../../components/Wrapper";
 import {User} from "../../models/user";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import Paginator from "../../components/Paginator";
 
 const Users = () => {
