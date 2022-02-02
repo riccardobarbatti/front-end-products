@@ -31,3 +31,7 @@ npm install
  # start dev  
  
 npm run dev
+
+#Cors
+
+host on port: 4280
